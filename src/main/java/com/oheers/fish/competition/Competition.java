@@ -5,6 +5,8 @@ import com.oheers.fish.FishUtils;
 import com.oheers.fish.competition.reward.Reward;
 import com.oheers.fish.config.messages.ConfigMessage;
 import com.oheers.fish.config.messages.Message;
+import com.oheers.fish.api.EMFCompetitionEndEvent;
+import com.oheers.fish.api.EMFCompetitionStartEvent;
 import com.oheers.fish.database.UserReport;
 import com.oheers.fish.fishing.FishingProcessor;
 import com.oheers.fish.fishing.items.Fish;
@@ -93,6 +95,8 @@ public class Competition {
 
             // Players can have had their rarities decided to be a null rarity if the competition only check is disabled for some rarities
             EvenMoreFish.decidedRarities.clear();
+		    EMFCompetitionStartEvent start = new EMFCompetitionStartEvent(this);
+		    Bukkit.getPluginManager().callEvent(start);
         } else {
             new Message(ConfigMessage.NOT_ENOUGH_PLAYERS).broadcast(true, true);
         }
@@ -100,6 +104,8 @@ public class Competition {
 
     public void end() {
         // print leaderboard
+		EMFCompetitionEndEvent end = new EMFCompetitionEndEvent(this);
+		Bukkit.getPluginManager().callEvent(end);
         this.timingSystem.cancel();
         statusBar.hide();
         for (Player player : Bukkit.getOnlinePlayers()) {
