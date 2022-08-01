@@ -95,8 +95,8 @@ public class Competition {
 
             // Players can have had their rarities decided to be a null rarity if the competition only check is disabled for some rarities
             EvenMoreFish.decidedRarities.clear();
-		    EMFCompetitionStartEvent start = new EMFCompetitionStartEvent(this);
-		    Bukkit.getPluginManager().callEvent(start);
+            EMFCompetitionStartEvent start = new EMFCompetitionStartEvent(this);
+            Bukkit.getPluginManager().callEvent(start);
         } else {
             new Message(ConfigMessage.NOT_ENOUGH_PLAYERS).broadcast(true, true);
         }
@@ -104,8 +104,8 @@ public class Competition {
 
     public void end() {
         // print leaderboard
-		EMFCompetitionEndEvent end = new EMFCompetitionEndEvent(this);
-		Bukkit.getPluginManager().callEvent(end);
+        EMFCompetitionEndEvent end = new EMFCompetitionEndEvent(this);
+	Bukkit.getPluginManager().callEvent(end);
         this.timingSystem.cancel();
         statusBar.hide();
         for (Player player : Bukkit.getOnlinePlayers()) {
